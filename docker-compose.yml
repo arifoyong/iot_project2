@@ -1,0 +1,33 @@
+version: '3.6'
+
+services:
+  iot-app:
+    build:
+      context: ./service
+      dockerfile: Dockerfile
+    container_name: iot-app
+    ports:
+      - 8001:8001
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=mysql://root:root@iot-mysql:3306/iot_dev
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./service:/usr/src/app
+    depends_on:
+      - iot-mysql
+
+  iot-mysql:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: iot-mysql
+    ports:
+      - 4000:3306
+    volumes:
+      - ./db:/usr/src/app
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql

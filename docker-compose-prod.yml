@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  iot-app-prod:
+    build:
+      context: ./service
+      dockerfile: Dockerfile
+    container_name: iot-app-prod
+    ports:
+      - 8000:8000
+    environment:
+      - NODE_ENV=production
+      - APP_PORT=8000
+      - DATABASE_URL=mysql://user:pass@host:3306/db
+    command: "npm run start-prod"
+    volumes:
+      - ./service:/usr/src/app

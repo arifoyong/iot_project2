@@ -1,0 +1,3 @@
+sequelize model:create --name Device --attributes id:integer,location:string,alertActive:boolean,temp_unit:string,temp_ucl:float,temp_lcl:float,humi_unit:string,humi_ucl:float,humi_lcl:float,batt_unit:string,batt_ucl:float,batt_lcl:float
+
+sequelize model:create --name Record --attributes id:integer,recordDate:date,temp:float,humi:float,batt:float
